@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+.history/
+datasets/raw/
+datasets/processed/
+models/**/*.safetensors
+models/**/*.bin
+*.safetensors
+*.bin

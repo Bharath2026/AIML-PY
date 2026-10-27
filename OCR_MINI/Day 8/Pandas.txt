@@ -1,0 +1,871 @@
+PYTHON BASIC CONCEPTS — THEORY FOR INTERVIEW
+
+1. WHAT IS PYTHON?
+Python is a high-level, interpreted, general-purpose programming language.
+
+Main features:
+- Easy to learn and read
+- Dynamically typed
+- Object-oriented
+- Interpreted
+- Supports functional and procedural programming
+- Large standard library
+- Cross-platform
+- Automatic memory management
+- Supports modules and packages
+
+Interview answer:
+Python is a high-level, interpreted, dynamically typed programming language known for its simple syntax and support for multiple programming paradigms, including object-oriented and functional programming.
+
+
+2. VARIABLES
+A variable is a name that refers to a value/object.
+
+Example:
+name = "Alice"
+age = 20
+
+Python does not require you to declare the data type explicitly.
+The same variable can refer to different types of objects.
+
+
+3. DATA TYPES
+Common built-in data types:
+
+Numeric:
+- int -> 10
+- float -> 10.5
+- complex -> 2 + 3j
+
+Boolean:
+- True
+- False
+
+String:
+- "Hello"
+
+Sequence:
+- list
+- tuple
+- range
+
+Set:
+- set
+
+Mapping:
+- dict
+
+None:
+- None
+
+
+4. MUTABLE VS IMMUTABLE
+
+Mutable objects can be changed after creation:
+- list
+- set
+- dict
+
+Example:
+numbers = [1, 2, 3]
+numbers[0] = 10
+
+Immutable objects cannot be changed after creation:
+- int
+- float
+- str
+- tuple
+- bool
+
+Interview answer:
+Mutable objects can be modified after creation, while immutable objects cannot be modified after creation.
+
+
+5. LIST
+A list is an ordered, mutable collection that allows duplicate values.
+
+Example:
+numbers = [10, 20, 30, 20]
+
+Properties:
+- Ordered
+- Mutable
+- Allows duplicates
+- Supports indexing
+- Supports slicing
+
+
+6. TUPLE
+A tuple is an ordered, immutable collection.
+
+Example:
+numbers = (10, 20, 30)
+
+Properties:
+- Ordered
+- Immutable
+- Allows duplicates
+- Supports indexing
+
+List vs Tuple:
+- List -> mutable -> []
+- Tuple -> immutable -> ()
+
+
+7. SET
+A set is a collection of unique elements.
+
+Example:
+numbers = {1, 2, 3, 2}
+
+Result:
+{1, 2, 3}
+
+Properties:
+- No duplicate values
+- Mutable
+- Not index-based
+- Useful for membership testing and set operations
+
+
+8. DICTIONARY
+A dictionary stores data as key-value pairs.
+
+Example:
+student = {
+    "name": "Alice",
+    "age": 20
+}
+
+Access:
+student["name"]
+
+Output:
+Alice
+
+Important:
+- Keys must be unique.
+- Keys must be hashable.
+- Values can be duplicated.
+- Dictionaries are mutable.
+- Modern Python dictionaries preserve insertion order.
+
+
+9. STRING
+A string is a sequence of characters.
+
+Example:
+name = "Python"
+
+Indexing:
+name[0] -> P
+
+Negative indexing:
+name[-1] -> n
+
+Slicing:
+name[0:3] -> Pyt
+
+Reverse:
+name[::-1]
+
+
+10. OPERATORS
+
+Arithmetic:
++  Addition
+-  Subtraction
+*  Multiplication
+/  Division
+// Floor division
+%  Modulus
+** Power
+
+Comparison:
+== Equal
+!= Not equal
+>  Greater
+<  Smaller
+>= Greater/equal
+<= Smaller/equal
+
+Logical:
+and
+or
+not
+
+Membership:
+in
+not in
+
+Identity:
+is
+is not
+
+
+11. = VS == VS IS
+
+= -> Assignment
+Example:
+x = 10
+
+== -> Value comparison
+Example:
+10 == 10
+
+is -> Object identity
+Example:
+a is b
+
+Interview answer:
+= assigns a value, == compares values, and is checks object identity.
+
+
+12. CONDITIONAL STATEMENTS
+
+if:
+if age >= 18:
+    print("Adult")
+
+if-else:
+if age >= 18:
+    print("Adult")
+else:
+    print("Minor")
+
+if-elif-else:
+if marks >= 90:
+    print("A")
+elif marks >= 75:
+    print("B")
+else:
+    print("C")
+
+Python uses indentation to define blocks.
+
+
+13. LOOPS
+
+for loop:
+Used when iterating over a sequence or range.
+
+for i in range(5):
+    print(i)
+
+while loop:
+Runs while a condition is true.
+
+i = 0
+while i < 5:
+    print(i)
+    i += 1
+
+
+14. BREAK, CONTINUE, PASS
+
+break:
+Stops the loop completely.
+
+continue:
+Skips the current iteration.
+
+pass:
+Does nothing; used as a placeholder.
+
+
+15. FUNCTIONS
+A function is a reusable block of code.
+
+Example:
+def add(a, b):
+    return a + b
+
+Benefits:
+- Code reuse
+- Better organization
+- Easier testing
+- Reduces repetition
+
+
+16. PARAMETERS VS ARGUMENTS
+
+In:
+def add(a, b):
+
+a and b are parameters.
+
+In:
+add(10, 20)
+
+10 and 20 are arguments.
+
+
+17. *ARGS
+Allows a function to accept multiple positional arguments.
+
+Example:
+def add(*args):
+    return sum(args)
+
+add(1, 2, 3, 4)
+
+args is a tuple.
+
+
+18. **KWARGS
+Allows multiple keyword arguments.
+
+Example:
+def show(**kwargs):
+    print(kwargs)
+
+show(name="Alice", age=20)
+
+kwargs is a dictionary.
+
+
+19. LAMBDA FUNCTION
+A lambda is a small anonymous function.
+
+Example:
+square = lambda x: x * x
+print(square(5))
+
+Output:
+25
+
+Often used with map(), filter(), and sorted().
+
+
+20. LIST COMPREHENSION
+A concise way to create a list.
+
+Normal:
+numbers = []
+for i in range(5):
+    numbers.append(i * 2)
+
+Comprehension:
+numbers = [i * 2 for i in range(5)]
+
+
+21. map()
+Applies a function to every item.
+
+Example:
+numbers = [1, 2, 3]
+result = list(map(lambda x: x * 2, numbers))
+
+Output:
+[2, 4, 6]
+
+
+22. filter()
+Keeps elements that satisfy a condition.
+
+Example:
+numbers = [1, 2, 3, 4, 5]
+result = list(filter(lambda x: x > 3, numbers))
+
+Output:
+[4, 5]
+
+
+23. EXCEPTION HANDLING
+Used to prevent programs from crashing because of runtime errors.
+
+Example:
+try:
+    x = 10 / 0
+except ZeroDivisionError:
+    print("Cannot divide by zero")
+
+Main keywords:
+- try
+- except
+- else
+- finally
+- raise
+
+
+24. raise
+Used to manually generate an exception.
+
+Example:
+age = -5
+if age < 0:
+    raise ValueError("Age cannot be negative")
+
+
+25. FILE HANDLING
+Common modes:
+r -> read
+w -> write
+a -> append
+x -> create
+
+Example:
+with open("data.txt", "r") as file:
+    data = file.read()
+
+The with statement automatically closes the file.
+
+
+26. MODULES AND PACKAGES
+
+Module:
+A Python file containing code.
+
+Example:
+math_utils.py
+
+Package:
+A collection of related Python modules.
+
+
+27. pip
+pip is Python's package manager.
+
+Example:
+pip install numpy
+
+It installs external Python packages.
+
+
+28. OOP
+OOP = Object-Oriented Programming.
+
+It organizes programs using classes and objects.
+
+Four major principles:
+- Encapsulation
+- Abstraction
+- Inheritance
+- Polymorphism
+
+
+29. CLASS
+A class is a blueprint for creating objects.
+
+Example:
+class Student:
+    pass
+
+
+30. OBJECT
+An object is an instance of a class.
+
+Example:
+student1 = Student()
+
+Student -> class
+student1 -> object
+
+
+31. __init__
+__init__ initializes an object's attributes.
+
+Example:
+class Student:
+    def __init__(self, name):
+        self.name = name
+
+s1 = Student("Alice")
+
+
+32. self
+self refers to the current object.
+
+Example:
+class Student:
+    def __init__(self, name):
+        self.name = name
+
+When s1 = Student("Alice"), self refers to s1.
+
+
+33. ENCAPSULATION
+Encapsulation means bundling data and methods together and controlling access to data.
+
+Example:
+class BankAccount:
+    def __init__(self, balance):
+        self.__balance = balance
+
+__balance uses name mangling and is intended for internal access.
+
+
+34. INHERITANCE
+A child class can inherit from a parent class.
+
+Example:
+class Animal:
+    def sound(self):
+        print("Sound")
+
+class Dog(Animal):
+    pass
+
+Dog gets the method from Animal.
+
+
+35. POLYMORPHISM
+Polymorphism means same interface or method name with different behavior.
+
+Example:
+class Dog:
+    def sound(self):
+        print("Bark")
+
+class Cat:
+    def sound(self):
+        print("Meow")
+
+Both have sound(), but behave differently.
+
+
+36. ABSTRACTION
+Abstraction means hiding implementation details and exposing essential functionality.
+
+Example:
+from abc import ABC, abstractmethod
+
+class Shape(ABC):
+    @abstractmethod
+    def area(self):
+        pass
+
+Child classes must implement area().
+
+
+37. MAGIC / DUNDER METHODS
+Methods surrounded by double underscores.
+
+Examples:
+__init__
+__str__
+__repr__
+__add__
+__sub__
+__mul__
+__len__
+
+They are used to define special behavior for objects.
+
+Operator overloading means defining how operators such as +, -, and * work with custom objects.
+
+
+38. __str__ VS __repr__
+
+__str__:
+User-friendly representation.
+
+__repr__:
+Developer/debugging-oriented representation.
+
+Interview answer:
+__str__ is mainly for readable output, while __repr__ is mainly for an unambiguous developer representation.
+
+
+39. SCOPE AND LEGB
+
+Python searches for names in this order:
+
+L -> Local
+E -> Enclosing
+G -> Global
+B -> Built-in
+
+So:
+Local -> Enclosing -> Global -> Built-in
+
+
+40. RECURSION
+A function calling itself.
+
+Example:
+def factorial(n):
+    if n == 0:
+        return 1
+    return n * factorial(n - 1)
+
+Every recursive function needs a base case to stop recursion.
+
+
+41. ITERATOR
+An iterator is an object that produces values one at a time.
+
+Common functions:
+iter()
+next()
+
+Example:
+numbers = [10, 20, 30]
+it = iter(numbers)
+
+print(next(it))
+print(next(it))
+
+
+42. GENERATOR
+A generator produces values lazily using yield.
+
+Example:
+def numbers():
+    yield 1
+    yield 2
+    yield 3
+
+Generators are useful for large data because they don't need to store all results in memory at once.
+
+
+43. DECORATOR
+A decorator modifies or extends a function's behavior without changing its original code.
+
+Example:
+def decorator(func):
+    def wrapper():
+        print("Before")
+        func()
+        print("After")
+    return wrapper
+
+@decorator
+def hello():
+    print("Hello")
+
+
+44. SHALLOW COPY VS DEEP COPY
+
+Shallow copy:
+Copies the outer object, but nested objects may still be shared.
+
+import copy
+b = copy.copy(a)
+
+Deep copy:
+Copies the object and nested objects recursively.
+
+b = copy.deepcopy(a)
+
+Interview answer:
+Shallow copy creates a new outer object while sharing nested references; deep copy recursively creates independent copies of nested objects.
+
+
+45. None
+None represents the absence of a value.
+
+Example:
+x = None
+
+None is different from:
+0
+""
+False
+
+Use:
+if x is None:
+
+
+46. isinstance()
+Checks whether an object belongs to a particular type or class.
+
+Example:
+x = 10
+isinstance(x, int)
+
+Output:
+True
+
+
+47. type()
+Returns the type of an object.
+
+Example:
+x = 10
+print(type(x))
+
+Difference:
+type() -> tells the type
+isinstance() -> checks whether an object is an instance of a type/class
+
+
+48. PYTHON MEMORY MANAGEMENT
+Python manages memory automatically.
+
+Important concepts:
+- Objects stored in memory
+- Reference counting
+- Garbage collection
+- Automatic memory management
+
+You generally don't manually free objects like in C/C++.
+
+
+49. DYNAMICALLY TYPED
+You don't need to declare a variable's type explicitly.
+
+Example:
+x = 10
+x = "Hello"
+
+A variable can refer to objects of different types at different times.
+
+
+50. INTERPRETED
+Python source code is generally executed through the Python runtime.
+
+Simplified view:
+Python Code
+    ↓
+Bytecode
+    ↓
+Python Virtual Machine
+    ↓
+Execution
+
+
+MOST IMPORTANT INTERVIEW DIFFERENCES
+
+List vs Tuple:
+List -> mutable
+Tuple -> immutable
+
+List vs Set:
+List -> ordered and index-based
+Set -> unique and not index-based
+
+== vs is:
+== -> value equality
+is -> object identity
+
+/ vs //:
+/ -> division
+// -> floor division
+
+break vs continue:
+break -> stop loop
+continue -> skip current iteration
+
+*args vs **kwargs:
+*args -> positional arguments stored as tuple
+**kwargs -> keyword arguments stored as dictionary
+
+append() vs extend():
+append() -> adds one item
+extend() -> adds elements from an iterable
+
+remove() vs pop():
+remove() -> removes by value
+pop() -> removes by index and returns the item
+
+sort() vs sorted():
+sort() -> changes the list
+sorted() -> returns a new sorted result
+
+str vs repr:
+str -> user-friendly representation
+repr -> developer-oriented representation
+
+Iterator vs Generator:
+Iterator -> follows iterator protocol
+Generator -> convenient lazy producer using yield
+
+Shallow vs Deep Copy:
+Shallow -> nested references may be shared
+Deep -> nested objects are copied independently
+
+Encapsulation vs Abstraction:
+Encapsulation -> bundle/control data and methods
+Abstraction -> hide implementation details
+
+Inheritance vs Polymorphism:
+Inheritance -> reuse/extend parent behavior
+Polymorphism -> same interface, different behavior
+
+
+PYTHON BASICS MASTER MAP
+
+Python
+|
+|-- Variables & Data Types
+|   |-- int
+|   |-- float
+|   |-- str
+|   |-- bool
+|   |-- list
+|   |-- tuple
+|   |-- set
+|   `-- dict
+|
+|-- Operators
+|   |-- Arithmetic
+|   |-- Comparison
+|   |-- Logical
+|   |-- Bitwise
+|   |-- Membership
+|   `-- Identity
+|
+|-- Control Flow
+|   |-- if / elif / else
+|   |-- for
+|   |-- while
+|   |-- break
+|   `-- continue
+|
+|-- Functions
+|   |-- parameters
+|   |-- return
+|   |-- *args
+|   |-- **kwargs
+|   |-- lambda
+|   `-- comprehensions
+|
+|-- Error & File Handling
+|   |-- try / except
+|   |-- raise
+|   `-- open()
+|
+|-- OOP
+|   |-- Class
+|   |-- Object
+|   |-- Encapsulation
+|   |-- Abstraction
+|   |-- Inheritance
+|   `-- Polymorphism
+|
+`-- Advanced Basics
+    |-- Recursion
+    |-- Iterator
+    |-- Generator
+    |-- Decorator
+    |-- Magic Methods
+    |-- @property
+    `-- Exception Handling
+
+
+Pandas
+Pandas is a Python library used for working with data sets.
+It has functions for analyzing, cleaning, exploring, and manipulating data.
+The name "Pandas" has a reference to both "Panel Data", and "Python Data Analysis".
+Empty Cells
+Empty cells can potentially give you a wrong result when you analyze data.
+
+Remove Rows
+One way to deal with empty cells is to remove rows that contain empty cells.
+
+This is usually OK, since data sets can be very big, and removing a few rows will not have a big impact on the result.
+import pandas as pd
+
+df = pd.read_csv('data.csv')
+
+new_df = df.dropna()
+
+print(new_df.to_string())
+By taking a look at our test data set, we can assume that row 11 and 12 are duplicates.
+
+To discover duplicates, we can use the duplicated() method.
+
+The duplicated() method returns a Boolean values for each row:
+print(df.duplicated())
+

@@ -1,0 +1,71 @@
+Machine Learning:
+Supervised Learning:
+			Used when you have input + known output/label.
+Unsupervised Learning:
+			Used when there are no predefined labels.
+Reinforcement Learning :
+			is a type of Machine Learning where an agent learns by interacting with an environment and receiving rewards or penalties.
+The goal is to learn actions that maximize the total reward over time.
+        Environment
+             ↑
+             |
+          Action
+             ↑
+          Agent
+             |
+          Reward
+             ↓
+        Environment
+
+Supervised Learning(Types):
+	Regression: 
+		Used when the output is a continuous numerical value. 
+			EX: ContinuesValues
+	Classification: 
+		Used when the output is a category/class. 
+			Ex: binary values
+
+
+Workflow:       
+	Dataset
+           ↓
+     Data Collection
+           ↓
+      Data Cleaning
+           ↓
+   Data Preprocessing
+           ↓
+ Feature Selection / Engineering
+           ↓
+   Split the Dataset
+     ↙           ↘
+ Training       Testing
+    Data          Data
+      ↓
+  Train ML Model
+      ↓
+   Make Predictions
+      ↓
+ Evaluate Model
+      ↓
+ Improve / Tune Model
+      ↓
+    Final Model
+      ↓
+ Predict New Data
+
+Fitting of model:(based on train and test data)
+Type:
+1.Under Fit  --Not work with Train and Test data 
+2.Best Fit   --work with both
+3.Over Fit   --same as BF not usefull
+
+Linear Regression:
+		
+		Linear Regression is a supervised machine learning algorithm used to predict a continuous numerical value.
+
+Linear regression tries to find the best-fit straight line through the data.
+The equation is:
+y = b_0 + b_1*x
+
+
