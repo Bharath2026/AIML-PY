@@ -1,0 +1,653 @@
+LLM AND SLM COMPLETE NOTES
+
+Topics: 1. Small Language Models (SLMs) vs Large Language Models (LLMs):
+differences, working and architecture 2. Types of LLMs 3. Transformer,
+Encoder and Decoder architectures
+ 1. SLM VS LLM 
+
+1.1 What is a Language Model?
+
+A language model is an AI model that learns patterns in language and
+estimates or generates sequences of tokens. A token may be a whole word,
+part of a word, punctuation mark, or another unit.
+
+A language model can be used to: - Predict the next token in a
+sequence. - Generate text and code. - Answer questions. - Summarize and
+translate text. - Extract information and classify text.
+
+1.2 What is an SLM?
+
+SLM stands for Small Language Model. It is a language model designed to
+have a relatively small number of parameters and lower computational
+requirements compared with large language models.
+
+SLMs are often designed for: - Specific tasks or domains. - On-device or
+edge deployment. - Low-latency applications. - Private or offline
+processing. - Environments with limited memory, power, or computing
+resources.
+
+Examples of small or compact model families and variants include
+Microsoft Phi small models, Google Gemma small variants, and Meta Llama
+small variants. The exact size and capabilities depend on the model
+version.
+
+Important: There is no universally agreed parameter-count boundary that
+separates an SLM from an LLM. The terms are relative and model size
+alone does not determine capability.
+
+1.3 What is an LLM?
+
+LLM stands for Large Language Model. It is a language model trained on
+very large datasets, typically using large neural networks with many
+learned parameters.
+
+Most modern generative LLMs use Transformer-based architectures. They
+can perform many language tasks, including: - Conversational question
+answering. - Text generation and summarization. - Code generation. -
+Translation. - Information extraction. - Reasoning-like multi-step
+responses. - Tool use, when integrated with external tools.
+
+Examples include GPT models, Claude models, Gemini models, and Llama
+models. These model families have different architectures, training
+methods, sizes, and capabilities.
+
+1.4 SLM vs LLM: Complete Comparison
+
+Feature SLM LLM
+
+Meaning Small Language Model Large Language Model Typical scale
+Relatively compact Relatively large Parameters Usually fewer Usually
+many more Training data Can be smaller or focused Often extremely large
+Compute requirements Lower in many cases Higher in many cases Memory
+requirements Usually lower Usually higher Inference cost Often lower
+Often higher Latency Often lower Can be higher Deployment Edge, mobile,
+local, cloud Commonly cloud; some run locally Offline use Often
+practical Depends on size and hardware Specialization Often task/domain
+focused Often broad general capability Context window Varies by model
+Varies by model Knowledge May be narrower May cover broader topics
+Fine-tuning Often practical with modest Can require more resources
+resources Privacy Can keep data on-device Depends on deployment Power
+use Often lower Often higher Complex tasks Good within its capability
+Often stronger on broad tasks Scalability Easier on constrained Often
+needs more infrastructure hardware Examples Phi small variants, GPT,
+Claude, Gemini, Gemma small variants Llama model families
+
+These are general tendencies, not guarantees. A well-trained SLM can
+outperform a much larger model on a narrow task. A larger model is not
+automatically more accurate.
+
+1.5 Working of an SLM
+
+A typical SLM application works as follows:
+
+1.  A user enters a prompt or task.
+2.  A tokenizer converts the text into tokens.
+3.  The tokens are converted into numerical embeddings.
+4.  Positional information is added or otherwise represented.
+5.  The model’s neural network processes the token representations. Many
+    SLMs use a compact Transformer.
+6.  The model calculates probabilities for possible next tokens.
+7.  A decoding method selects the next token.
+8.  The process repeats until the response is complete.
+9.  The tokenizer converts output tokens into readable text.
+
+An SLM can run on a laptop, phone, embedded device, or server if the
+hardware has sufficient memory and processing capability. Quantization
+can reduce model memory and sometimes improve inference speed, with
+possible quality trade-offs.
+
+1.6 Working of an LLM
+
+The high-level workflow of a generative LLM is similar:
+
+1.  Data preparation: large text and/or multimodal datasets are
+    collected, filtered, and prepared.
+2.  Tokenization: training text is converted into token IDs.
+3.  Embedding: token IDs are mapped to numerical vectors.
+4.  Position information: the model receives information about token
+    order, using positional embeddings, rotary position embeddings, or
+    another method.
+5.  Transformer processing: attention and feed-forward layers process
+    the representations.
+6.  Training objective: for a common decoder-only LLM, the model learns
+    to predict the next token.
+7.  Pretraining: the model learns general patterns from large datasets.
+8.  Post-training: supervised fine-tuning and preference/alignment
+    methods may improve instruction following and response quality.
+9.  Inference: a user prompt is processed and the model generates tokens
+    sequentially.
+10. Decoding: methods such as greedy decoding, beam search, or sampling
+    determine how tokens are selected.
+
+Not every LLM uses exactly the same data, architecture, objective, or
+post-training process. Some models are multimodal and process images,
+audio, or video as well as text.
+
+1.7 Typical SLM Architecture
+
+A common SLM architecture is a compact decoder-only Transformer:
+
+User Prompt | Tokenizer | Token IDs | Token Embeddings + Position
+Information | Compact Transformer Blocks |– Causal Self-Attention |–
+Feed-Forward Network |– Residual Connections and Normalization |
+Language Modeling Head | Next-Token Probabilities | Decoding / Token
+Selection | Generated Response
+
+This is a common design, not a rule. SLMs can also be encoder-only or
+encoder-decoder models.
+
+1.8 Typical LLM Architecture
+
+A common modern generative LLM architecture is a decoder-only
+Transformer:
+
+User Prompt | Tokenizer | Token IDs | Token Embeddings + Position
+Information | Many Transformer Decoder Blocks |– Causal Self-Attention
+|– Feed-Forward Network |– Residual Connections |– Normalization |
+Language Modeling Head | Probability Distribution over Vocabulary |
+Select Next Token | Append Token and Repeat | Final Generated Text
+
+The number of layers, hidden dimensions, attention heads, parameters,
+and context length varies by model.
+
+1.9 When Should We Use SLM or LLM?
+
+Choose an SLM when: - The task is narrow and clearly defined. - The
+application needs low latency. - The device has limited memory or
+compute. - Local or offline inference is important. - Data should remain
+on a local device or private server. - Operating cost must be low.
+
+Choose an LLM when: - The task is broad or varied. - Complex language
+understanding or generation is needed. - The application needs broad
+general-purpose capability. - More compute and infrastructure are
+available. - A larger context or multimodal capability is required, if
+supported by the chosen model.
+
+A practical system can combine both: an SLM handles simple requests,
+while difficult requests are routed to a larger model.
+
+2. TYPES OF
+LLMS 
+
+There are several ways to classify language models. The most useful
+classification is by Transformer architecture.
+
+2.1 Encoder-Only Models
+
+Purpose: Understand or represent input text.
+
+How they work: - The input sequence is tokenized and embedded. -
+Self-attention allows each token to use information from tokens on both
+its left and right, subject to padding masks. - The encoder creates
+contextual representations. - A task-specific output layer performs
+classification, token labeling, or another task.
+
+Common uses: - Sentiment analysis. - Text classification. - Named Entity
+Recognition (NER). - Semantic representations and embeddings. -
+Extractive question answering.
+
+Examples: - BERT. - RoBERTa. - ALBERT. - DeBERTa.
+
+These models are not normally designed for open-ended autoregressive
+text generation.
+
+2.2 Decoder-Only Models
+
+Purpose: Generate text one token at a time.
+
+How they work: - The prompt is tokenized and embedded. - Causal
+self-attention prevents a token from attending to future positions. -
+The model predicts the next token. - The selected token is appended to
+the sequence. - The process repeats until generation stops.
+
+Common uses: - Chatbots. - Text generation. - Code generation. -
+Conversational assistants. - Instruction following.
+
+Examples: - GPT model family. - Llama model family. - Mistral model
+family. - Qwen language model family. - Gemma model family.
+
+2.3 Encoder-Decoder Models
+
+Purpose: Transform an input sequence into an output sequence.
+
+How they work: - The encoder reads the complete input and creates
+contextual representations. - The decoder generates the output token by
+token. - Decoder cross-attention uses the encoder’s representations. -
+Causal masking prevents the decoder from seeing future output tokens.
+
+Common uses: - Machine translation. - Summarization. - Text
+transformation. - Some question-answering tasks.
+
+Examples: - T5. - BART. - Original Transformer for machine translation.
+
+2.4 Classification Summary
+
+Type Main purpose Attention pattern
+
+Encoder-only Understand input Usually bidirectional Decoder-only
+Generate output Causal / left-to-right Encoder-decoder Input-to-output
+Encoder bidirectional; decoder causal + cross-attention
+
+2.5 Other Useful Ways to Classify LLMs
+
+A. By modality: - Text-only models: process and generate text. -
+Vision-language models: process text and images. - Audio-language
+models: process or generate audio. - Multimodal models: combine multiple
+modalities, such as text, images, audio, or video.
+
+B. By access and distribution: - Open-weight models: model weights are
+made available under specified terms. Open-weight does not always mean
+fully open-source. - Proprietary/closed models: weights and/or
+implementation are not publicly released for general use.
+
+C. By specialization: - General-purpose models: support many types of
+tasks. - Domain-specific models: adapted for fields such as law,
+medicine, finance, or science. - Code models: optimized or trained for
+programming-related tasks.
+
+D. By training or adaptation: - Base/pretrained models: trained on broad
+data before instruction adaptation. - Instruction-tuned models: further
+trained to follow user instructions. - Fine-tuned models: adapted to a
+specific dataset, task, or domain. - Preference-aligned models: further
+optimized using human or AI preference signals.
+
+These categories can overlap. For example, a model can be decoder-only,
+multimodal, open-weight, and instruction-tuned at the same time.
+
+ 3.TRANSFORMER ARCHITECTURE
+
+
+3.1 What is a Transformer?
+
+A Transformer is a neural network architecture introduced in the 2017
+paper “Attention Is All You Need”.
+
+It was developed to process sequences using attention mechanisms rather
+than relying entirely on recurrent processing such as RNNs.
+
+Transformers are widely used in: - Natural Language Processing. - Large
+Language Models. - Machine translation. - Text summarization. - Computer
+vision. - Speech and multimodal AI.
+
+3.2 Original Transformer: Overall Architecture
+
+The original Transformer has two main parts:
+
+1.  Encoder stack: processes the input sequence.
+2.  Decoder stack: generates the output sequence.
+
+Architecture:
+
+SOURCE INPUT | Input Tokenization | Input Embeddings + Positional
+Encoding | v +—————————+ | ENCODER STACK | | | | Multi-Head
+Self-Attention| | | | | Add & Norm | | | | | Feed-Forward Network | | |
+| | Add & Norm | | | | Repeat N times | +—————————+ | Encoder
+Representations | |——————————-| | TARGET OUTPUT TOKENS | | | Target
+Embeddings + | Positional Encoding | | | v | +—————————+ | | DECODER
+STACK | | | | | | Masked Multi-Head | | | Self-Attention | | | | | | |
+Add & Norm | | | | | | | Encoder-Decoder |<——| | Cross-Attention | | | |
+Add & Norm | | | Feed-Forward Network | | | Add & Norm | | | Repeat N
+times | +—————————+ | Linear Layer | Softmax | Next-Token Probability |
+Generated Output
+
+The original paper used six encoder layers and six decoder layers in its
+base configuration. Modern Transformer models can use different numbers
+and configurations.
+
+3.3 What is an Encoder?
+
+The encoder reads the input sequence and converts it into contextual
+representations.
+
+Example input: “The student is reading a book.”
+
+The encoder processes the sentence so each token representation can
+contain information about other relevant tokens in the sentence.
+
+Encoder block:
+
+Input Tokens | Token Embeddings | Positional Encoding | Multi-Head
+Self-Attention | Add & Layer Normalization | Position-wise Feed-Forward
+Network | Add & Layer Normalization | Output Representations
+
+Main encoder components:
+
+1.  Input Embeddings: Convert token IDs into dense numerical vectors.
+
+2.  Positional Encoding: Supplies information about token positions. The
+    original Transformer uses sinusoidal positional encodings; other
+    models may use learned or alternative position methods.
+
+3.  Multi-Head Self-Attention: Lets each input token attend to other
+    input tokens. Multiple attention heads learn different
+    relationships.
+
+4.  Residual Connection: Adds a sublayer’s input to its output to help
+    information and gradients flow through the network.
+
+5.  Layer Normalization: Normalizes hidden representations to support
+    stable training.
+
+6.  Feed-Forward Network: Applies learned transformations independently
+    at each sequence position, with shared weights across positions in
+    the standard Transformer block.
+
+Encoder-only models such as BERT use this type of encoder structure,
+with model-specific details.
+
+3.4 What is a Decoder?
+
+The decoder generates an output sequence one token at a time.
+
+In the original encoder-decoder Transformer, it uses: - Masked
+self-attention over generated/previous target tokens. - Cross-attention
+over encoder output. - A feed-forward network.
+
+Decoder block:
+
+Previous Output Tokens | Target Embeddings | Positional Encoding |
+Masked Multi-Head Self-Attention | Add & Layer Normalization |
+Encoder-Decoder Cross-Attention | Add & Layer Normalization |
+Feed-Forward Network | Add & Layer Normalization | Linear Layer +
+Softmax | Next Token Prediction
+
+Main decoder components:
+
+1.  Output Embeddings: Convert previously generated target token IDs
+    into vectors.
+
+2.  Masked Self-Attention: Uses a causal mask so each position can only
+    attend to allowed previous positions and itself, not future target
+    tokens.
+
+3.  Cross-Attention: The decoder’s queries attend to keys and values
+    derived from the encoder output. This connects the generated output
+    to the input.
+
+4.  Feed-Forward Network: Further transforms each position’s
+    representation.
+
+5.  Linear Layer: Maps the final representation to vocabulary-sized
+    scores, called logits.
+
+6.  Softmax: Converts logits into probabilities for possible next
+    tokens.
+
+3.5 Encoder vs Decoder
+
+Feature Encoder Decoder
+
+Main role Understand input Generate output Input Source tokens Previous
+target tokens Self-attention Usually bidirectional Causal / masked
+Cross-attention Not normally In encoder-decoder models Output Contextual
+vectors Next-token scores Typical use Classification, NER Text
+generation Example BERT GPT-style models
+
+Important distinction: A GPT-style decoder-only model uses causal
+self-attention but does not contain the encoder stack or encoder-decoder
+cross-attention. The original Transformer decoder does contain
+cross-attention.
+
+============================================================ 4.
+ATTENTION MECHANISM: Q, K AND V
+============================================================
+
+Attention is a central part of the Transformer. It allows the model to
+calculate how strongly tokens should use information from other tokens.
+
+Q = Query K = Key V = Value
+
+Intuitive explanation: - Query: What information is this token looking
+for? - Key: What information does each token offer for matching? -
+Value: What information is passed forward if that token is attended to?
+
+The model creates Q, K, and V by applying learned linear transformations
+to token representations.
+
+Scaled dot-product attention:
+
+Attention(Q, K, V) = softmax((Q x K transpose) / sqrt(d_k)) x V
+
+Where: - Q is the query matrix. - K is the key matrix. - V is the value
+matrix. - d_k is the dimension of each key vector. - The division by
+sqrt(d_k) scales the scores.
+
+Steps: 1. Compare queries with keys using dot products. 2. Scale the
+scores. 3. Apply softmax to obtain attention weights. 4. Multiply the
+weights by values. 5. Combine the weighted values into an output
+representation.
+
+4.1 Multi-Head Attention
+
+Instead of using one attention operation, the Transformer uses multiple
+attention heads.
+
+Each head can learn different relationships. Their outputs are
+concatenated and projected to form the final result.
+
+Simplified process: Input Representations | Create multiple Q, K, V sets
+| Run attention in parallel across heads | Concatenate head outputs |
+Linear Projection | Final Multi-Head Attention Output
+
+4.2 Self-Attention vs Cross-Attention
+
+Self-attention: - Queries, keys, and values come from the same sequence
+representation. - Used in encoder self-attention and decoder masked
+self-attention.
+
+Cross-attention: - Queries come from the decoder. - Keys and values come
+from encoder output. - Allows the decoder to use information from the
+input sequence.
+
+============================================================ 5.
+IMPORTANT TRANSFORMER COMPONENTS
+============================================================
+
+5.1 Tokenization
+
+Converts text into token IDs using a tokenizer vocabulary.
+
+Example: Text: “I love AI” Possible tokens: [“I”, ” love”, ” AI”] The
+exact tokens depend on the tokenizer.
+
+5.2 Embeddings
+
+Maps token IDs to learned numerical vectors. Similar or related language
+patterns may have related representations, depending on training.
+
+5.3 Positional Information
+
+Attention by itself does not inherently encode sequence order.
+Positional information helps the model distinguish token positions.
+Methods include sinusoidal encoding, learned positional embeddings, and
+rotary position embeddings (RoPE).
+
+5.4 Feed-Forward Network
+
+A neural network applied to each token position after attention. It
+commonly contains linear transformations and a nonlinear activation
+function.
+
+5.5 Residual Connections
+
+Skip connections that add a sublayer input to its output. They help
+information and gradients flow through deep networks.
+
+5.6 Layer Normalization
+
+Normalizes hidden features. Transformer implementations differ in
+whether normalization is applied before or after sublayers.
+
+5.7 Softmax
+
+Converts a vector of scores into a probability distribution. In language
+generation, it is commonly applied to vocabulary logits.
+
+5.8 Causal Masking
+
+Prevents a decoder position from accessing future positions during
+autoregressive generation.
+
+============================================================ 6. HOW A
+DECODER-ONLY LLM GENERATES TEXT
+============================================================
+
+Example prompt: “Artificial intelligence is”
+
+Step 1: Tokenizer converts the prompt into token IDs. Step 2: Embeddings
+and position information are created. Step 3: Decoder Transformer blocks
+process the prompt using causal attention. Step 4: The output layer
+produces scores for the next token. Step 5: A decoding strategy selects
+a token, for example “changing”. Step 6: The new token is appended to
+the prompt. Step 7: The model processes the updated context and predicts
+another token. Step 8: This repeats until an end condition is reached.
+
+Possible generated result: “Artificial intelligence is changing many
+industries.”
+
+The example is illustrative; actual output depends on the model and
+decoding settings.
+
+============================================================ 7. KEY
+TERMS TO REMEMBER
+============================================================
+
+Parameter: A learned numerical value in a neural network.
+
+Token: A unit of text processed by the model.
+
+Vocabulary: The set of tokens known to a tokenizer/model.
+
+Embedding: A numerical vector representing a token or other input.
+
+Context window: The maximum amount of context a model can process in one
+input sequence, subject to model and implementation limits.
+
+Pretraining: Initial large-scale training that teaches general patterns.
+
+Fine-tuning: Additional training to adapt a pretrained model to a task
+or domain.
+
+Instruction tuning: Fine-tuning using examples that teach a model to
+follow instructions.
+
+Inference: Using a trained model to produce predictions or responses.
+
+Hallucination: A generated statement that is incorrect or unsupported,
+even if it sounds plausible.
+
+Quantization: Representing model weights or activations with lower
+numerical precision to reduce memory use and potentially improve speed,
+with possible quality trade-offs.
+
+RAG: Retrieval-Augmented Generation. Relevant external information is
+retrieved and supplied to a generative model as context.
+
+============================================================ 8.
+INTERVIEW QUESTIONS AND ANSWERS
+============================================================
+
+Q1. What is an SLM? Answer: A Small Language Model is a relatively
+compact language model designed to operate with lower compute and memory
+requirements, often for specific tasks or local deployment.
+
+Q2. What is an LLM? Answer: A Large Language Model is a language model
+trained on large datasets with a large neural network, commonly used for
+broad language understanding and generation.
+
+Q3. What is the main difference between SLM and LLM? Answer: SLMs are
+generally smaller and more resource-efficient, while LLMs generally use
+more parameters and compute and can offer broader capabilities. Actual
+performance depends on the model and task.
+
+Q4. What is a Transformer? Answer: A neural network architecture based
+on attention mechanisms, introduced in the paper “Attention Is All You
+Need”.
+
+Q5. What are the two main parts of the original Transformer? Answer:
+Encoder and decoder.
+
+Q6. What is the function of an encoder? Answer: It processes input
+tokens and creates contextual representations using self-attention and
+feed-forward layers.
+
+Q7. What is the function of a decoder? Answer: It generates output
+tokens, using masked self-attention and, in encoder-decoder models,
+cross-attention to encoder representations.
+
+Q8. What is self-attention? Answer: A mechanism that lets tokens
+calculate how much information to take from other tokens in the same
+sequence.
+
+Q9. What is cross-attention? Answer: A mechanism in which decoder
+queries attend to encoder keys and values.
+
+Q10. What is masked self-attention? Answer: Self-attention with a causal
+mask that blocks access to future token positions.
+
+Q11. What are Query, Key and Value? Answer: Learned projections used in
+attention. Queries are matched against keys to calculate attention
+weights, which are applied to values.
+
+Q12. What is Multi-Head Attention? Answer: Multiple attention operations
+run in parallel, allowing the model to learn different relationships
+between tokens.
+
+Q13. What is positional encoding? Answer: A way of supplying
+token-position information to the Transformer.
+
+Q14. What is the difference between BERT and GPT? Answer: BERT is an
+encoder-only model commonly used for language understanding tasks.
+GPT-style models are decoder-only models commonly used for
+autoregressive text generation.
+
+Q15. What are the three main Transformer model types? Answer:
+Encoder-only, decoder-only, and encoder-decoder.
+
+Q16. Which architecture is commonly used by modern chat-oriented
+generative LLMs? Answer: Decoder-only Transformer architecture is
+common, although model designs vary.
+
+Q17. Does a larger model always perform better? Answer: No. Data
+quality, training, architecture, fine-tuning, inference settings, and
+task suitability all matter.
+
+Q18. Can an SLM run locally? Answer: Many SLMs can run locally if the
+device has sufficient memory and compute. Quantized versions can reduce
+resource requirements.
+
+============================================================ 9. QUICK
+REVISION ============================================================
+
+SLM: - Smaller, often cheaper and faster to run. - Useful for focused
+tasks and local deployment. - Not automatically less capable on every
+task.
+
+LLM: - Larger language model, often broad in capability. - Commonly
+needs more compute and memory. - Can support complex and varied tasks.
+
+Encoder-only: - Reads and represents input. - Usually uses bidirectional
+self-attention. - Example: BERT.
+
+Decoder-only: - Generates tokens sequentially. - Uses causal
+self-attention. - Example: GPT-style models.
+
+Encoder-decoder: - Encoder represents the input. - Decoder generates the
+output. - Decoder uses cross-attention to encoder representations. -
+Example: T5 and BART.
+
+Transformer: - Built around attention and feed-forward blocks. - Uses
+token representations and position information. - Original design
+contains encoder and decoder stacks.
+
+Attention: - Q = Query. - K = Key. - V = Value. - Attention weights
+determine how information is combined.
+
+FINAL STUDY TIP
+
+Learn the concepts in this order: 1. Tokenization 2. Embeddings 3.
+Positional encoding 4. Query, Key and Value 5. Self-attention 6.
+Multi-Head Attention 7. Encoder architecture 8. Decoder architecture 9.
+Encoder-decoder Transformer 10. Decoder-only LLM generation 11. SLM vs
+LLM 12. RAG and fine-tuning
+
