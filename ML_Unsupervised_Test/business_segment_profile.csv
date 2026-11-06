@@ -1,0 +1,7 @@
+Cluster,Customer_Count,Average_Age,Average_Annual_Income,Average_Spending_Score,Customer_Percentage,Suggested_Segment_Name,Marketing_Recommendation
+0,33,41.9,88.9,17.0,16.5,"Affluent, Low-Spend Customers","Test personalized recommendations, product education and carefully targeted incentives."
+1,45,56.3,54.3,49.1,22.5,Low-Income / Low-Spend Customers,Use low-cost promotions and practical essentials; avoid expensive acquisition campaigns.
+2,24,25.2,25.8,76.9,12.0,Budget-Conscious / Enthusiastic Shoppers,"Promote value bundles, seasonal discounts and affordable loyalty rewards."
+3,39,32.7,86.5,82.1,19.5,High-Income / High-Spend Targets,"Prioritize loyalty rewards, premium launches, VIP experiences and personalized offers."
+4,38,26.7,57.6,47.8,19.0,Low-Income / Low-Spend Customers,Use low-cost promotions and practical essentials; avoid expensive acquisition campaigns.
+5,21,45.5,26.3,19.4,10.5,Low-Income / Low-Spend Customers,Use low-cost promotions and practical essentials; avoid expensive acquisition campaigns.

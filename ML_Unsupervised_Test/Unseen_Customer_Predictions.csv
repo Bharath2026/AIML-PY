@@ -1,0 +1,7 @@
+CustomerID,Age,Annual Income (k$),Spending Score (1-100),Predicted_Cluster
+U1,23,25,78,2
+U2,44,90,18,0
+U3,32,88,85,3
+U4,57,52,48,1
+U5,27,58,50,4
+U6,46,24,20,5
