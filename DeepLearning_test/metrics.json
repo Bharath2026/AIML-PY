@@ -1,0 +1,12 @@
+{
+  "dataset": "MNIST",
+  "training_images": 60000,
+  "testing_images": 10000,
+  "epochs": 5,
+  "batch_size": 128,
+  "optimizer": "Adam",
+  "loss": "CrossEntropyLoss",
+  "training_accuracy_last_epoch_percent": 98.48,
+  "testing_accuracy_percent": 97.56,
+  "model_file": "mnist_model.pth"
+}

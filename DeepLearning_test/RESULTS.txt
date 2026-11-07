@@ -1,0 +1,11 @@
+RESULTS:
+
+Training accuracy (last epoch): 98.45%
+Testing accuracy (10,000 unseen images): 97.43%
+Epochs: 5
+Training images: 60000
+Testing images: 10000
+Optimizer: Adam
+Loss: CrossEntropyLoss
+Saved model: mnist_model.pth
+
